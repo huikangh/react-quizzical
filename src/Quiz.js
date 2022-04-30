@@ -5,8 +5,9 @@ export default function Quiz(props) {
     const choices = [props.correct, ...props.incorrects]
 
     const choicesArray = choices.map(choice => {
+        const styles = {backgroundColor: choice===props.selected ? "#D6DBF5" : "white"}
         return (
-            <div className="choice">
+            <div className="choice" style={styles} onClick={props.changeSelected}>
                 {choice}
             </div>
         )
