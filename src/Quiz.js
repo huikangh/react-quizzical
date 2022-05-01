@@ -1,13 +1,33 @@
 import React from "react"
+import { nanoid } from "nanoid"
+
 
 export default function Quiz(props) {
 
-    const choices = [props.correct, ...props.incorrects]
+    const choicesArray = props.choices.map(choice => {
 
-    const choicesArray = choices.map(choice => {
-        const styles = {backgroundColor: choice===props.selected ? "#D6DBF5" : "white"}
+        let styles = {backgroundColor: "white"}
+        if (!props.gameOver) {
+            if (choice === props.selected) {
+                styles = {backgroundColor: "#D6DBF5"}
+            }
+        } else {
+            if (choice === props.correct) {
+                styles = {backgroundColor: "#94D7A2"}
+            } else if (choice === props.selected) {
+                styles = {backgroundColor: "#F8BCBC", opacity: 0.6}
+            } else {
+                styles = {backgroundColor: "white", opacity: 0.6}
+            }
+        }
+
+        let handleClick
+        if (!props.gameOver) {
+            handleClick = props.changeSelected
+        }
+
         return (
-            <div className="choice" style={styles} onClick={props.changeSelected}>
+            <div className="choice" style={styles} onClick={handleClick} key={nanoid()}>
                 {choice}
             </div>
         )
