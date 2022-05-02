@@ -85,9 +85,8 @@ export default function QuizPage(props) {
 
     return (
         <div className="game--div">
-            <h1 className="game--title">Quizzical Game</h1>
+            <div className="game--title">Quizzical</div>
             <div className="quiz--div"> {quizElements} </div>
-            <hr/>
             {score === -1 ? 
                 <div className="answer--button" onClick={checkAnswers}>Check Answers</div> :
                 <div className="game--footer">

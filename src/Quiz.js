@@ -6,7 +6,7 @@ export default function Quiz(props) {
 
     const choicesArray = props.choices.map(choice => {
 
-        let styles = {backgroundColor: "white"}
+        let styles = {backgroundColor: "#F5F7FB"}
         if (!props.gameOver) {
             if (choice === props.selected) {
                 styles = {backgroundColor: "#D6DBF5"}
@@ -15,9 +15,9 @@ export default function Quiz(props) {
             if (choice === props.correct) {
                 styles = {backgroundColor: "#94D7A2"}
             } else if (choice === props.selected) {
-                styles = {backgroundColor: "#F8BCBC", opacity: 0.6}
+                styles = {backgroundColor: "#F8BCBC", opacity: 0.5}
             } else {
-                styles = {backgroundColor: "white", opacity: 0.6}
+                styles = {backgroundColor: "#F5F7FB", opacity: 0.5}
             }
         }
 
