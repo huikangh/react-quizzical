@@ -6,14 +6,18 @@ import { decode } from 'html-entities';
 
 export default function QuizPage(props) {
 
-    // const APIurl = "https://opentdb.com/api.php?amount=5&category=27&difficulty=easy&type=multiple"
-    const APIurl = "https://opentdb.com/api.php?amount=5&difficulty=easy&type=multiple"
-
     const [quizData, setQuizData] = React.useState([])
     const [quizzes, setQuizzes] = React.useState([])
     const [score, setScore] = React.useState(-1)
 
     React.useEffect(() => {
+        /* parse game option from gameOption state and generate the url*/
+        const amount = `amount=${props.gameOption.amount}`
+        const category = props.gameOption.category ? `&category=${props.gameOption.category}` : ``
+        const type = props.gameOption.type ? `&type=${props.gameOption.type}` : ``
+        const difficulty = `&difficulty=${props.gameOption.difficulty}`
+        const APIurl = "https://opentdb.com/api.php?" + amount + category + difficulty + type
+
         fetch(APIurl)
             .then(res => res.json())
             .then(data => setQuizData(data.results))
@@ -42,6 +46,10 @@ export default function QuizPage(props) {
             [a[i], a[j]] = [a[j], a[i]];
         }
         return a;
+    }
+
+    function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1)
     }
 
     function changeSelected(event, id) {
@@ -86,14 +94,19 @@ export default function QuizPage(props) {
     return (
         <div className="game--div">
             <div className="game--title">Quizzical</div>
+            <div className="game--desc">
+                {props.gameOption.categoryName} - {capitalize(props.gameOption.difficulty)}
+            </div>
             <div className="quiz--div"> {quizElements} </div>
+
             {score === -1 ? 
                 <div className="answer--button" onClick={checkAnswers}>Check Answers</div> :
                 <div className="game--footer">
-                    <h3>You scored {score}/5 correct answers!</h3>
+                    <h3>You scored {score}/{props.gameOption.amount} correct answers!</h3>
                     <div className="reset--button" onClick={props.changeGameState}>New Game</div>
                 </div>
             }
+
         </div>
     )
 }
