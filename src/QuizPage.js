@@ -99,14 +99,15 @@ export default function QuizPage(props) {
             </div>
             <div className="quiz--div"> {quizElements} </div>
 
+            <div className="game--footer">
             {score === -1 ? 
                 <div className="answer--button" onClick={checkAnswers}>Check Answers</div> :
-                <div className="game--footer">
+                <div className="game--result">
                     <h3>You scored {score}/{props.gameOption.amount} correct answers!</h3>
                     <div className="reset--button" onClick={props.changeGameState}>New Game</div>
                 </div>
             }
-
+            </div>
         </div>
     )
 }
