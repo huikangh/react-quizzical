@@ -1,6 +1,6 @@
 import React from "react"
-import HomePage from "./HomePage"
-import QuizPage from "./QuizPage"
+import HomePage from "./components/HomePage"
+import QuizPage from "./components/QuizPage"
 
 
 
